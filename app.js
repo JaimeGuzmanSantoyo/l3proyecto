@@ -36,7 +36,9 @@ app.listen(port, () => {
 
 const path = require('path');
 
-
+app.get('/unam.jpg', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'unam.jpg'));
+});
 app.post('/index', (req, res) => {
     res.render('index');
 });
