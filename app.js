@@ -1,4 +1,6 @@
-const express = require('express');
+require("dotenv").config();
+const {Sequelize}=require("sequelize");
+const express = require('express');         //import  de node 
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 
@@ -9,25 +11,28 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 
 // Credenciales para DB, aquí idealmente usa variables de entorno (más abajo te explico)
-const db = mysql.createConnection({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || 'zeus0401',
-    database: process.env.DB_NAME || 'chatbot_rh',
-    port: process.env.DB_PORT || '3308'
+const db = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    
+
+       ////datos de la bd puerto ,contraseñas ,usuario .tc 
+    
+    
+    dialect: 'mysql',
 });
 
 // Conexion a la DB
-db.connect(err => {
-    if (err) {
-        console.log(`Error al conectar a la base de datos: ${err}`);  /// se verifica la base de datos y sus coincidencias 
-    } else {
-        console.log(`Conexión a la base de datos exitosa`);
-    }
-});
+db.authenticate()
+  .then(() => console.log(' Conexión a la base de datos exitosa'))
+  .catch(err => console.error(' Error al conectar a la base de datos:', err));
 
 
-const port = process.env.PORT || 3037;
+const port = process.env.PORT || 3037;    //lo que se hace aqui es indicar en que puerto va a salir nuestra pw 
 
 // No necesitas pasar hostname, para que escuche en todas las interfaces
 app.listen(port, () => {
