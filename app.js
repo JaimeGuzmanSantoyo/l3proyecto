@@ -1,15 +1,26 @@
 require("dotenv").config();    /// mandamos  a llamar dotev 
+const helmet = require("helmet");
 const {Sequelize}=require("sequelize");   /// mandamos  a sequelize
 const express = require('express');         //import  de node 
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');   
 
+
 const app = express();   /// se mando a llamar node express
+app.use(
+  helmet({
+    contentSecurityPolicy: false, // evita conflictos con EJS o recursos locales
+    crossOriginEmbedderPolicy: false,
+  })
+); 
+
+
+
 app.use(express.static(__dirname + '/views')); // para archivos estáticos
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');    // se usa para visualizar los archivos ejs 
-                                
+   /// helmet se usa para generar una mayor seguridad a nivel de las cabeceras 
 
 const db = new Sequelize(
   process.env.DB_NAME,             // en este caso lo que hace es mandamos a llamar nuestreas credenciales de nuestra bd que estan en el archivo env
