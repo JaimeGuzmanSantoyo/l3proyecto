@@ -4,13 +4,13 @@ const {Sequelize}=require("sequelize");   /// mandamos  a sequelize
 const express = require('express');         //import  de node 
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');   
-
+import rateLimit from 'express-rate-limit';
 
 const app = express();   /// se mando a llamar node express
-app.use(
+app.use(                  
   helmet({
     contentSecurityPolicy: false, // evita conflictos con EJS o recursos locales
-    crossOriginEmbedderPolicy: false,
+    crossOriginEmbedderPolicy: false,    
   })
 ); 
 
@@ -44,12 +44,24 @@ db.authenticate()   // se usa una antentificacion para ver si si quedo la conexi
 
 const port = process.env.PORT || 3037;    //lo que se hace aqui es indicar en que puerto va a salir nuestra pw 
 
+
+
+
+
 // No necesitas pasar hostname, para que escuche en todas las interfaces
 app.listen(port, () => {            // se indica en que pueto esta mandando la pagina web 
     console.log(`Servidor corriendo en el puerto ${port}`);
 });
 
 const path = require('path');
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 15 minutes
+  max:60 , // el numero de peticiones es de 60 por 5 minutos 
+  message: "demasiadas solicitudes departe del cliente ,esperar a que se refresque ",
+});
+
+// Apply the rate limiter to all requests
+app.use(limiter);
 
 app.get('/unam.jpg', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'unam.jpg'));    // indexamos la foto "unam" cque sirve como fondo de pantalla en index
