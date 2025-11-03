@@ -4,9 +4,11 @@ const {Sequelize}=require("sequelize");   /// mandamos  a sequelize
 const express = require('express');         //import  de node 
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');   
-import rateLimit from 'express-rate-limit';
+const rateLimit = require("express-rate-limit");
+const morgan=require("morgan");
 
 const app = express();   /// se mando a llamar node express
+app.use(morgan('combined'))
 app.use(                  
   helmet({
     contentSecurityPolicy: false, // evita conflictos con EJS o recursos locales
@@ -54,8 +56,9 @@ app.listen(port, () => {            // se indica en que pueto esta mandando la p
 });
 
 const path = require('path');
+
 const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 15 minutes
+  windowMs: 5 * 60 * 1000, // 5 minutes
   max:60 , // el numero de peticiones es de 60 por 5 minutos 
   message: "demasiadas solicitudes departe del cliente ,esperar a que se refresque ",
 });
