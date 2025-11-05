@@ -20,6 +20,7 @@ app.use(
 
 app.use(express.static(__dirname + '/views')); // para archivos estáticos
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.set('view engine', 'ejs');    // se usa para visualizar los archivos ejs 
    /// helmet se usa para generar una mayor seguridad a nivel de las cabeceras 
@@ -38,6 +39,24 @@ const db = new Sequelize(
     dialect: 'mysql',
 });
 
+const { DataTypes } = require('sequelize');
+
+const Duda = db.define('Duda', {
+  pregunta: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  respuesta: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  }
+}, {
+  tableName: 'faq', // usa el nombre exacto de tu tabla en la base de datos
+  timestamps: false   // desactiva createdAt / updatedAt si no los tienes
+});
+
+
+///--------
 // Conexion a la DB
 db.authenticate()   // se usa una antentificacion para ver si si quedo la conexion a la bd 
   .then(() => console.log(' Conexión a la base de datos exitosa'))       // lo que se hace en esta parte es establlecer mensajes si se conecta o no se conecta a la bd 
@@ -75,4 +94,37 @@ app.post('/index', (req, res) => {   // aqui se lo que se hace es indexar la pag
 
 app.get('/index', (req, res) => {
     res.render('index');
+});
+app.get('/api/preguntas', async (req, res) => {
+  try {
+    const preguntas = await Duda.findAll({ attributes: ['pregunta'] });
+    res.json(preguntas);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al obtener las preguntas' });
+  }
+});
+
+// Obtener la respuesta de una pregunta específica
+app.post('/api/responder', async (req, res) => {
+  try {
+    const { pregunta } = req.body;
+    const duda = await Duda.findOne({ where: { pregunta } });
+
+    if (!duda) {
+      return res.json({ respuesta: 'No se encontró una respuesta para esa pregunta.' });
+    }
+
+    res.json({ respuesta: duda.respuesta });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Error al buscar la respuesta' });
+  }
+});
+process.on('uncaughtException', err => {
+  console.error('❌ Error no capturado:', err);
+});
+
+process.on('unhandledRejection', err => {
+  console.error('❌ Promesa rechazada sin capturar:', err);
 });
