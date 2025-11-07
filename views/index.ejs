@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <title>DUDAS</title>
-  <link rel="icon" href="logo-removebg-preview.png" type="image/x-png" sizes="16x16">
+  <title>DUDAS</title>    <!-- se define el tiulo de la pagina ,el que se ve en la pestaña -->
+  <link rel="icon" href="logo-removebg-preview.png" type="image/x-png" sizes="16x16">    <!--se  define el fabicon  la iamgen a utilizar ,el tamaño y el tipo  -->
 
   <style>
     .formulario-wrapper {
       width: 60%;
-      display: flex;
-      justify-content: center;
+      display: flex;               /* container para establecer en el formulario ,un centadro un tamaño en especifico y una jusificacion  */ 
+      justify-content: center;             
       align-items: center;
     }
     .form-container {
@@ -27,11 +27,11 @@
     }
     .container-fondo {
       width: 100%;
-      background-image: url('unam.jpg');
+      background-image: url('unam.jpg');  /*    se ponen los container para establecer diferentes caracteristicas en ciertos fragmentos del codigo    */ 
       background-size: cover;
-      background-position: center;        
+      background-position: center;        /* en este caso lo que se hace es establecer una imagen de fondo llamada unam ,se estable en una posicion especifica ,con un margen especifico y radio especifico*/
       border-top-right-radius: 30px;
-      border-bottom-right-radius: 30px;
+      border-bottom-right-radius: 30px;    
       display: flex;
       justify-content: center;
       align-items: center;
@@ -42,15 +42,15 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
+  <!-- NAVBAR  ///  bootstrap-->
   <nav class="navbar navbar-expand-sm bg-body-tertiary m-0 border-0">
-    <div class="container-fluid" style="background-color: rgb(190, 128, 241);">
-      <a class="navbar-brand" href="#" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;color: white;font-size: 150%;">ChatBot RH - FES Aragón</a>
+    <div class="container-fluid" style="background-color: rgb(190, 128, 241);">   <!-- se estable el como queremeos que este el menu ,el color -->
+      <a class="navbar-brand" href="#" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;color: white;font-size: 150%;">ChatBot RH - FES Aragón</a> <!-- se estable el como queremeos que este el texto principal  ,el color  la letra ,etc-->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="https://www.unam.mx/"><img src="logo (1).png" style="width: 180px;height: 85px"></a>
-          </li>
+            <a class="nav-link active" href="https://www.unam.mx/"><img src="logo (1).png" style="width: 180px;height: 85px"></a>   <!--logos e imagenes a cargar -->
+          </li>                                                                                                                      <!--se metieron referencias para otras paginas -->
           <li class="nav-item">
             <a class="nav-link" href="https://plataformaeducativa.aragon.unam.mx/"><img src="cuentas-aragon.png" style="width: 140px;height: 85px;"></a>
           </li>
@@ -59,21 +59,21 @@
     </div>
   </nav>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <div class="container-fondo" style="color: white">
+  <!-- menu de preguntas y dudas frecuentes  -->
+  <div class="container-fondo" style="color: white">   <!-- se manda a llamar al container fondo que se creo al principio de la pagina index,js -->   
     <div class="d-flex justify-content-center align-items-center mt-4" style="gap: 2rem;">
-      <div id="chatbox" class="form-container form-container ms-auto">      
+      <div id="chatbox" class="form-container form-container ms-auto">           <!-- se mandan a llamar ciertas clases de bootsrap  --> 
         <h3>Dudas y Preguntas Frecuentes</h3>
         <div id="conversacion"></div><br>
-        <form id="formulario" style="margin: 10px; border: 5px solid black; border-radius: 5px;">
-          <label for="pregunta">Selecciona una pregunta:</label>
+        <form id="formulario" style="margin: 10px; border: 5px solid black; border-radius: 5px;">   <!-- en el mismo formulario se establecen los parametros a trabajar desde el margen ,borde ,color  --> 
+          <label for="pregunta">Selecciona una pregunta:</label>       <!--se establece el nombre del formulario  --> 
           <select id="pregunta" required>
-            <option value="">-- Elige una opción --</option>
+            <option value="">-- Elige una opción --</option>              <!-- en la presente linea de codigo lo que se hace es una menu para que seleccione algo ,es decir un opcion  --> 
           </div>
-          <option value="horario de atención">¿Cuál es el horario de atención?</option>
-        <option value="documentos para constancia">¿Qué documentos necesito para solicitar una constancia?</option>
-        <option value="ubicación de la oficina">¿Dónde está la oficina de Recursos Humanos?</option>
-        <option value="contacto">¿Cuál es el contacto de Recursos Humanos?</option>
+          <option value="horario de atención">¿Cuál es el horario de atención?</option>            <!-- aqui si se esta estalbeciendo ell menu --> 
+        <option value="documentos para constancia">¿Qué documentos necesito para solicitar una constancia?</option><!-- aqui si se esta estalbeciendo ell menu --> 
+        <option value="ubicación de la oficina">¿Dónde está la oficina de Recursos Humanos?</option><!-- aqui si se esta estalbeciendo ell menu --> 
+        <option value="contacto">¿Cuál es el contacto de Recursos Humanos?</option><!-- aqui si se esta estalbeciendo ell menu --> 
       </select>
           <button type="submit" style="border-radius: 60px;">Consultar</button>
         </form>
@@ -81,10 +81,10 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>        <!-- link de bootsrap  para usarlo en el front -->  
 
   <script>
-    // Paso 5 - Cargar preguntas desde la base de datos
+  
     window.addEventListener("DOMContentLoaded", async () => {
       const res = await fetch("/api/preguntas");
       const preguntas = await res.json();
