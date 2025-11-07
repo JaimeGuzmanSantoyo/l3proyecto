@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const rateLimit = require("express-rate-limit");         //import  de express pero de la herramienta rate limit 
 const morgan=require("morgan");          //import  de la herramienta morgan   
 
-const app = express();   /// se mando a llamar node express
+const app = express();   /// se mannodedo a llamar node express
 app.use(morgan('combined'))      // aqui ya se esta aplicando ,con combuned lo que se hace es indicar la aplicacion de morgan de tipo de monitoreo ,si alto o bajo 
 app.use(                  
   helmet({

@@ -1,117 +1,280 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <title>DUDAS</title>    <!-- se define el tiulo de la pagina ,el que se ve en la pestaña -->
-  <link rel="icon" href="logo-removebg-preview.png" type="image/x-png" sizes="16x16">    <!--se  define el fabicon  la iamgen a utilizar ,el tamaño y el tipo  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <title>Dudas y Preguntas Frecuentes</title>
+  <link
+    rel="icon"
+    href="logo-removebg-preview.png"
+    type="image/x-png"
+    sizes="16x16"
+  />
 
   <style>
-    .formulario-wrapper {
-      width: 60%;
-      display: flex;               /* container para establecer en el formulario ,un centadro un tamaño en especifico y una jusificacion  */ 
-      justify-content: center;             
-      align-items: center;
-    }
-    .form-container {
-      background: white;
-      padding: 2.5em;
-      box-shadow: 0 6px 12px;
-      width: 1000px;
-      min-width: 600px;
-      min-height: 800px;
-      align-items: center;
-      border-radius: 35px;
-      background-color: rgba(0, 0, 0,0.4);
-    }
-    .container-fondo {
-      width: 100%;
-      background-image: url('unam.jpg');  /*    se ponen los container para establecer diferentes caracteristicas en ciertos fragmentos del codigo    */ 
-      background-size: cover;
-      background-position: center;        /* en este caso lo que se hace es establecer una imagen de fondo llamada unam ,se estable en una posicion especifica ,con un margen especifico y radio especifico*/
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 30px;    
+    body {
+      background-color: #f6f7fb;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(90deg, #7c4dff, #b47cff);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand {
+      color: white !important;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      cursor: pointer;
       text-align: center;
+    }
+
+    /* Logos */
+    .navbar img {
+      max-height: 60px;
+      width: auto;
+    }
+
+    /* Contenedor principal */
+    .main-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .chatbox {
+      background: white;
+      width: 100%;
+      max-width: 600px;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatbox h3 {
+      text-align: center;
+      color: #5a2bbf;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    /* Select y botón */
+    form label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    select {
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 0.6rem;
+      width: 100%;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background-color: #7c4dff;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      padding: 0.6rem 1.4rem;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #6834d4;
+    }
+
+    /* Contenedor de respuesta */
+    #conversacion {
+      margin-top: 1.5rem;
+      background-color: #f2efff;
+      border-radius: 10px;
+      padding: 1rem;
+      min-height: 60px;
+    }
+
+    strong {
+      color: #5a2bbf;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #ece8ff;
+      text-align: center;
+      padding: 0.8rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* Créditos (easter egg) */
+    #creditos {
+      display: none;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background: #fff;
+      color: #333;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      font-size: 0.9rem;
+      z-index: 9999;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .navbar img {
+        max-height: 55px;
+      }
+
+      .navbar-brand {
+        font-size: 1rem;
+        margin-top: 8px;
+      }
+
+      .chatbox {
+        padding: 1.5rem;
+        max-width: 95%;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .chatbox h3 {
+        font-size: 1.3rem;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .navbar img {
+        max-height: 45px;
+      }
+
+      #creditos {
+        top: auto;
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- NAVBAR  ///  bootstrap-->
-  <nav class="navbar navbar-expand-sm bg-body-tertiary m-0 border-0">
-    <div class="container-fluid" style="background-color: rgb(190, 128, 241);">   <!-- se estable el como queremeos que este el menu ,el color -->
-      <a class="navbar-brand" href="#" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;color: white;font-size: 150%;">ChatBot RH - FES Aragón</a> <!-- se estable el como queremeos que este el texto principal  ,el color  la letra ,etc-->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="https://www.unam.mx/"><img src="logo (1).png" style="width: 180px;height: 85px"></a>   <!--logos e imagenes a cargar -->
-          </li>                                                                                                                      <!--se metieron referencias para otras paginas -->
-          <li class="nav-item">
-            <a class="nav-link" href="https://plataformaeducativa.aragon.unam.mx/"><img src="cuentas-aragon.png" style="width: 140px;height: 85px;"></a>
-          </li>
-        </ul>
-      </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm px-4">
+    <div class="d-flex align-items-center flex-wrap" style="gap: 20px;">
+      <a class="nav-link p-0" href="https://www.unam.mx/">
+        <img src="logo (1).png" alt="UNAM" />
+      </a>
+      <a class="nav-link p-0" href="https://plataformaeducativa.aragon.unam.mx/">
+        <img src="cuentas-aragon.png" alt="Cuentas Aragón" />
+      </a>
+      <a class="nav-link p-0" href="https://www.aragon.unam.mx/fes-aragon/#!/inicio">
+        <img src="logo-fes.png" alt="FES Aragón" />
+      </a>
+    </div>
+
+    <a class="navbar-brand ms-auto" onclick="mostrarCreditos()">
+      ChatBot RH - FES Aragón
+    </a>
+
+    <div id="creditos">
+      👨‍💻 Guzmán Sanoyo José Jaime <br>
+      👨‍💻 López Padilla José Néstor <br>
+      Proyecto UNAM - FES Aragón
     </div>
   </nav>
 
-  <!-- menu de preguntas y dudas frecuentes  -->
-  <div class="container-fondo" style="color: white">   <!-- se manda a llamar al container fondo que se creo al principio de la pagina index,js -->   
-    <div class="d-flex justify-content-center align-items-center mt-4" style="gap: 2rem;">
-      <div id="chatbox" class="form-container form-container ms-auto">           <!-- se mandan a llamar ciertas clases de bootsrap  --> 
-        <h3>Dudas y Preguntas Frecuentes</h3>
-        <div id="conversacion"></div><br>
-        <form id="formulario" style="margin: 10px; border: 5px solid black; border-radius: 5px;">   <!-- en el mismo formulario se establecen los parametros a trabajar desde el margen ,borde ,color  --> 
-          <label for="pregunta">Selecciona una pregunta:</label>       <!--se establece el nombre del formulario  --> 
-          <select id="pregunta" required>
-            <option value="">-- Elige una opción --</option>              <!-- en la presente linea de codigo lo que se hace es una menu para que seleccione algo ,es decir un opcion  --> 
-          </div>
-          <option value="horario de atención">¿Cuál es el horario de atención?</option>            <!-- aqui si se esta estalbeciendo ell menu --> 
-        <option value="documentos para constancia">¿Qué documentos necesito para solicitar una constancia?</option><!-- aqui si se esta estalbeciendo ell menu --> 
-        <option value="ubicación de la oficina">¿Dónde está la oficina de Recursos Humanos?</option><!-- aqui si se esta estalbeciendo ell menu --> 
-        <option value="contacto">¿Cuál es el contacto de Recursos Humanos?</option><!-- aqui si se esta estalbeciendo ell menu --> 
-      </select>
-          <button type="submit" style="border-radius: 60px;">Consultar</button>
-        </form>
-      </div>
+  <!-- Contenido principal -->
+  <div class="main-container">
+    <div class="chatbox">
+      <h3>Dudas y Preguntas Frecuentes</h3>
+      <div id="conversacion"></div>
+      <form id="formulario" class="mt-3">
+        <label for="pregunta">Selecciona una pregunta:</label>
+        <select id="pregunta" required>
+          <option value="">-- Elige una opción --</option>
+        </select>
+        <div class="text-center mt-3">
+          <button type="submit">Consultar</button>
+        </div>
+      </form>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>        <!-- link de bootsrap  para usarlo en el front -->  
+  <footer>
+    © 2025 ChatBot RH - FES Aragón | Proyecto UNAM | GUZMÁN SANOYO JOSÉ JAIME | LÓPEZ PADILLA JOSÉ NÉSTOR
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-  
+    // Easter egg
+    function mostrarCreditos() {
+      const div = document.getElementById("creditos");
+      div.style.display = div.style.display === "none" ? "block" : "none";
+    }
+
+    // Cargar preguntas
     window.addEventListener("DOMContentLoaded", async () => {
-      const res = await fetch("/api/preguntas");
-      const preguntas = await res.json();
+      try {
+        const res = await fetch("/api/preguntas");
+        const preguntas = await res.json();
 
-      const select = document.getElementById("pregunta");
-      select.innerHTML = '<option value="">-- Elige una opción --</option>';
+        const select = document.getElementById("pregunta");
+        select.innerHTML = '<option value="">-- Elige una opción --</option>';
 
-      preguntas.forEach(p => {
-        const option = document.createElement("option");
-        option.value = p.pregunta;
-        option.textContent = p.pregunta;
-        select.appendChild(option);
-      });
+        preguntas.forEach((p) => {
+          const option = document.createElement("option");
+          option.value = p.pregunta;
+          option.textContent = p.pregunta;
+          select.appendChild(option);
+        });
+      } catch (error) {
+        console.error("Error al cargar preguntas:", error);
+      }
     });
 
-    // Enviar pregunta al backend
+    // Consultar respuesta
     document.getElementById("formulario").addEventListener("submit", async (e) => {
       e.preventDefault();
       const pregunta = document.getElementById("pregunta").value;
-      const res = await fetch("/api/responder", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pregunta })
-      });
-      const data = await res.json();
-    document.getElementById("conversacion").innerHTML = `<p><strong>Respuesta:</strong> ${data.respuesta}</p>`;
 
+      try {
+        const res = await fetch("/api/responder", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pregunta }),
+        });
+        const data = await res.json();
+        document.getElementById(
+          "conversacion"
+        ).innerHTML = `<p><strong>Respuesta:</strong> ${data.respuesta}</p>`;
+      } catch (error) {
+        document.getElementById("conversacion").innerHTML =
+          "<p><strong>Error:</strong> No se pudo obtener la respuesta.</p>";
+      }
     });
   </script>
 </body>
